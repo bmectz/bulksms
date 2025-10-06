@@ -32,6 +32,7 @@ export default function LoginPage() {
         onSubmit={handleLogin}
         className="bg-white shadow p-6 rounded w-full max-w-sm"
       >
+        <h1 className="text-xl font-bold mb-4 text-center">BM SMS</h1>
         <h1 className="text-xl font-bold mb-4 text-center">Login</h1>
         {error && <div className="text-red-600 text-sm mb-2">{error}</div>}
         <input

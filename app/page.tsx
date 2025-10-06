@@ -98,7 +98,7 @@ export default function Page() {
     <div className="m-4 md:m-6">
       <header className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">BM Fundi SMS — Simple</h1>
-        <div className="space-x-2">
+        <div className="space-x-2 flex flex-col md:flex-row gap-2">
           <button
             onClick={() => setShowAdd(true)}
             className="px-3 py-2 bg-blue-600 text-white rounded"
@@ -109,7 +109,7 @@ export default function Page() {
             onClick={() => setShowSend(true)}
             className="px-3 py-2 bg-green-600 text-white rounded"
           >
-            Tuma SMS kwa mafundi
+            Tuma SMS
           </button>
           <button
             onClick={async () => {
