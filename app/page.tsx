@@ -111,6 +111,15 @@ export default function Page() {
           >
             Tuma SMS kwa mafundi
           </button>
+          <button
+            onClick={async () => {
+              await fetch("/api/logout");
+              window.location.href = "/login";
+            }}
+            className="px-3 py-2 bg-red-600 text-white rounded"
+          >
+            Logout
+          </button>
         </div>
       </header>
 
