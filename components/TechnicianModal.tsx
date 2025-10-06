@@ -134,7 +134,12 @@ export default function TechnicianModal({
             <label className="text-sm block mb-1">Aina</label>
             <select
               value={type}
-              onChange={(e) => setType(e.target.value as any)}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === "CAR_ACCESSORIES" || value === "CCTV") {
+                  setType(value);
+                }
+              }}
               className="w-full border px-3 py-2 rounded"
             >
               <option value="CAR_ACCESSORIES">Car Accessories</option>

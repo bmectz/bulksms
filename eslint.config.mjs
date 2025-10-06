@@ -14,11 +14,19 @@ const eslintConfig = [
   {
     ignores: [
       "node_modules/**",
+      "lib/generated/",
       ".next/**",
       "out/**",
       "build/**",
       "next-env.d.ts",
     ],
+  },
+  {
+    files: ["lib/generated/**/*.js"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-require-imports": "off",
+    },
   },
 ];
 

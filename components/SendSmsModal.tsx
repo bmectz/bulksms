@@ -7,6 +7,10 @@ type Props = {
   onClose: () => void;
   onSent: () => void;
 };
+type Res = {
+  success: string;
+  messageId: string;
+};
 
 export default function SendSmsModal({ open, onClose, onSent }: Props) {
   const [type, setType] = useState<"CAR_ACCESSORIES" | "CCTV">(
@@ -15,7 +19,7 @@ export default function SendSmsModal({ open, onClose, onSent }: Props) {
   const [message, setMessage] = useState("");
   const [from, setFrom] = useState("");
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<Res>();
   const [error, setError] = useState<string | null>(null);
 
   if (!open) return null;
@@ -63,7 +67,12 @@ export default function SendSmsModal({ open, onClose, onSent }: Props) {
             <label className="text-sm block mb-1">Aina ya mafundi</label>
             <select
               value={type}
-              onChange={(e) => setType(e.target.value as any)}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === "CAR_ACCESSORIES" || value === "CCTV") {
+                  setType(value);
+                }
+              }}
               className="w-full border px-3 py-2 rounded"
             >
               <option value="CAR_ACCESSORIES">Car Accessories</option>
