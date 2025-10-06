@@ -62,11 +62,11 @@ export async function POST(req: Request) {
       console.log("sms2");
       // provider accepts either an array or comma separated list
       const to = technicians.map((t) => t.phone);
-      const from = "BM SECURITY";
+      console.log("TYPE: ", from);
       const res = await smsApi.send({
         to,
         message,
-        from: "BM SECURITY",
+        from,
       });
       console.log("Response from AT: ", res);
       console.log("sms3");

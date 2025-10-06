@@ -35,7 +35,6 @@ export default function SendSmsModal({ open, onClose, onSent }: Props) {
         body: JSON.stringify({ type, message, from }),
       });
       const data = await res.json();
-      console.log("DATA: ", data);
       if (!res.ok) {
         setError(data?.error || "send failed");
       } else {
@@ -56,12 +55,12 @@ export default function SendSmsModal({ open, onClose, onSent }: Props) {
         onSubmit={handleSend}
         className="bg-white p-6 rounded shadow z-10 w-full max-w-lg"
       >
-        <h3 className="text-lg font-semibold mb-3">Send SMS to technicians</h3>
+        <h3 className="text-lg font-semibold mb-3">Tuma SMS kwa mafundi</h3>
         {error && <div className="text-sm text-red-600 mb-2">{error}</div>}
 
         <div className="space-y-3">
           <div>
-            <label className="text-sm block mb-1">Type</label>
+            <label className="text-sm block mb-1">Aina ya mafundi</label>
             <select
               value={type}
               onChange={(e) => setType(e.target.value as any)}
@@ -71,15 +70,17 @@ export default function SendSmsModal({ open, onClose, onSent }: Props) {
               <option value="CCTV">CCTV</option>
             </select>
           </div>
-
           <div>
-            <label className="text-sm block mb-1">From (optional)</label>
-            <input
+            <label className="text-sm block mb-1">Kutoka kwa</label>
+            <select
               value={from}
               onChange={(e) => setFrom(e.target.value)}
               className="w-full border px-3 py-2 rounded"
-              placeholder="Sender name"
-            />
+            >
+              <option value="">Select sender</option>
+              <option value="BM SOUNDS">BM SOUNDS</option>
+              <option value="BM SECURITY">BM SECURITY</option>
+            </select>
           </div>
 
           <div>
@@ -95,21 +96,21 @@ export default function SendSmsModal({ open, onClose, onSent }: Props) {
             <button
               type="button"
               onClick={onClose}
-              className="px-3 py-2 bg-gray-200 rounded"
+              className="px-3 py-2 bg-gray-200 text-gray-800 rounded"
             >
-              Cancel
+              Ahirisha
             </button>
             <button
               type="submit"
               disabled={loading}
               className="px-4 py-2 bg-green-600 text-white rounded"
             >
-              {loading ? "Sending..." : "Send to all"}
+              {loading ? "Inatuma..." : "Tuma kwa wote"}
             </button>
           </div>
 
           {result && (
-            <pre className="bg-gray-50 p-3 rounded text-xs mt-3 overflow-auto">
+            <pre className="bg-gray-50 p-3 rounded text-xs mt-3 text-green-600 overflow-auto">
               {JSON.stringify(result, null, 2)}
             </pre>
           )}
