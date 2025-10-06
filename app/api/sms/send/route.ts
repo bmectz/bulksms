@@ -55,8 +55,8 @@ export async function POST(req: Request) {
       console.log("sms1");
       // const AT = africastalking;
       const AT = AfricasTalking({
-        apiKey: process.env.AT_API_KEY,
-        username: process.env.AT_USERNAME,
+        apiKey: process.env.AT_API_KEY || "",
+        username: process.env.AT_USERNAME || "",
       });
       const smsApi = AT.SMS;
       console.log("sms2");
@@ -73,7 +73,7 @@ export async function POST(req: Request) {
       // mark all recipients as SENT and store provider response in each recipient
       await prisma.sMSRecipient.updateMany({
         where: { messageId: sms.id },
-        data: { status: "SENT", response: res as any },
+        data: { status: "SENT", response: res as { data: string } },
       });
       console.log("sms4");
 
@@ -82,9 +82,9 @@ export async function POST(req: Request) {
         providerResponse: "res",
         messageId: sms.id,
       });
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.log("sms5");
-      const errMsg = String(err.message || err);
+      const errMsg = String((err as Error).message || err);
       console.log("ERR SMS: ", errMsg);
       // mark recipients as FAILED with error
       await prisma.sMSRecipient.updateMany({
